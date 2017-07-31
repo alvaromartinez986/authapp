@@ -17,10 +17,7 @@ export class ProtectedComponent implements OnInit {
 
   ngOnInit() {
     if (this.auth.userProfile) {
-
-
       this.profile = this.auth.userProfile;
-      console.log(this.profile);
     } else {
       this.auth.getProfile((err, profile) => {
         this.profile = profile;

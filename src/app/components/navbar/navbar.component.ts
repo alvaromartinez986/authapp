@@ -6,22 +6,12 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './navbar.component.html',
   styles: []
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent{
 
   profile: any;
 
   constructor(private auth: AuthService) {
     auth.handleAuthentication();
-  }
-
-  ngOnInit() {
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-    } else {
-      this.auth.getProfile((err, profile) => {
-        this.profile = profile;
-      });
-    }
   }
 
   login() {

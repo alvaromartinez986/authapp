@@ -12,7 +12,7 @@ export class AuthService {
     responseType: 'token id_token',
     audience: 'https://msae986.auth0.com/userinfo',
     redirectUri: 'http://localhost:4200/callback',
-    scope: 'openid'
+    scope: 'openid profile'
   });
 
   userProfile: any;
