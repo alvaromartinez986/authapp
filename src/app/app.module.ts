@@ -11,6 +11,8 @@ import { ProtectedComponent } from './components/protected/protected.component';
 
 //services
 import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { AuthService } from './services/auth.service';
 	APP_ROUTING
   ],
   providers: [
-	  AuthService
+	  AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

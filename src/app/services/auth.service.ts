@@ -15,13 +15,29 @@ export class AuthService {
     scope: 'openid'
   });
 
+  userProfile: any;
+
   constructor(public router: Router) { }
 
   public login(): void {
     this.auth0.authorize();
   }
 
-  // ...
+  public getProfile(cb): void {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('Access token must exist to fetch profile');
+    }
+
+    const self = this;
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        self.userProfile = profile;
+      }
+      cb(err, profile);
+    });
+  }
+
   public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
@@ -34,6 +50,8 @@ export class AuthService {
       }
     });
   }
+
+
 
   private setSession(authResult): void {
     // Set the time that the access token will expire at
